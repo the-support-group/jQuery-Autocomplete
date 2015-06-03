@@ -1,9 +1,10 @@
 {
-    "name": "devbridge-autocomplete",
+    "name": "tsg-devbridge-autocomplete",
     "version": "1.2.20",
-    "homepage": "https://github.com/devbridge/jQuery-Autocomplete",
+    "homepage": "https://github.com/the-support-group/jQuery-Autocomplete",
     "authors": [
-        "Tomas Kirda"
+        "Tomas Kirda",
+        "Steve Heath"
     ],
     "description": "Autocomplete provides suggestions while you type into the text field.",
     "main": "dist/jquery.autocomplete.js",
@@ -18,7 +19,8 @@
         "bower_components",
         "spec",
         "scripts",
-        "content"
+        "content",
+        ".gitignore"
     ],
     "dependencies": {
         "jquery": ">=1.7"
