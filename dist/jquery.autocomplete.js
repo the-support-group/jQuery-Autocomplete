@@ -135,10 +135,10 @@
         var pattern;
 
         // Any apostrophes in the result?
-        if(htmlSafeString.indexOf("'") == -1 && suggestion.value.indexOf("'") > -1) {
+        if(currentValue.indexOf("'") == -1 && suggestion.value.indexOf("'") > -1) {
             var newPattern = [];
-            for(var charIdx = 0; charIdx < htmlSafeString.length; charIdx++) {
-                newPattern.push(htmlSafeString[charIdx] + "'?");
+            for(var charIdx = 0; charIdx < currentValue.length; charIdx++) {
+                newPattern.push(currentValue[charIdx] + "'?");
             }
             pattern = '(' + newPattern.join('') + ')';
         } else {
