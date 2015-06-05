@@ -128,12 +128,22 @@
 
     Autocomplete.formatResult = function (suggestion, currentValue) {
         var htmlSafeString = suggestion.value
-            .replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;');
 
-        var pattern = '(' + utils.escapeRegExChars(currentValue) + ')';
+        var pattern;
+
+        // Any apostrophes in the result?
+        if(htmlSafeString.indexOf("'") == -1 && suggestion.value.indexOf("'") > -1) {
+            var newPattern = [];
+            for(var charIdx = 0; charIdx < htmlSafeString.length; charIdx++) {
+                newPattern.push(htmlSafeString[charIdx] + "'?");
+            }
+            pattern = '(' + newPattern.join('') + ')';
+        } else {
+            pattern = '(' + utils.escapeRegExChars(currentValue) + ')';
+        }
 
         return htmlSafeString.replace(new RegExp(pattern, 'gi'), '<strong>$1<\/strong>');
     };
@@ -491,7 +501,7 @@
         isExactMatch: function (query) {
             var suggestions = this.suggestions;
 
-            return (suggestions.length === 1 && suggestions[0].value.toLowerCase() === query.toLowerCase());
+            return false;
         },
 
         getQuery: function (value) {
