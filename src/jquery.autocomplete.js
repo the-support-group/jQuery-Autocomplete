@@ -134,13 +134,19 @@
 
         var pattern;
 
-        // Any apostrophes in the result?
-        if(currentValue.indexOf("'") == -1 && suggestion.value.indexOf("'") > -1) {
+        // Any apostrophes/hyphens in the result?
+        if(currentValue.indexOf("'") == -1 && currentValue.indexOf("-") == -1 && (suggestion.value.indexOf("'") > -1 || suggestion.value.indexOf("-") > -1)) {
             var newPattern = [];
-            for(var charIdx = 0; charIdx < currentValue.length; charIdx++) {
-                newPattern.push(currentValue[charIdx] + "'?");
+            var queryValue = currentValue;
+
+            // Strip spaces.
+            queryValue = currentValue.replace(/\s+/g, '');
+
+            for(var charIdx = 0; charIdx < queryValue.length; charIdx++) {
+                newPattern.push(queryValue[charIdx] + "[' -]*");
             }
             pattern = '(' + newPattern.join('') + ')';
+
         } else {
             pattern = '(' + utils.escapeRegExChars(currentValue) + ')';
         }
