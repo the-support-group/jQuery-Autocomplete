@@ -57,7 +57,7 @@
             defaults = {
                 ajaxSettings: {},
                 autoSelectFirst: false,
-                appendTo: document.body,
+                appendTo: 'search__autocomplete',
                 serviceUrl: null,
                 lookup: null,
                 onSelect: null,
@@ -75,7 +75,7 @@
                 onSearchComplete: noop,
                 onSearchError: noop,
                 preserveInput: false,
-                containerClass: 'autocomplete-suggestions',
+                containerClass: 'search__suggestions',
                 tabDisabled: false,
                 dataType: 'text',
                 currentRequest: null,
@@ -110,8 +110,8 @@
         that.noSuggestionsContainer = null;
         that.options = $.extend({}, defaults, options);
         that.classes = {
-            selected: 'autocomplete-selected',
-            suggestion: 'autocomplete-suggestion'
+            selected: 'search__suggestion--selected',
+            suggestion: 'search__suggestion'
         };
         that.hint = null;
         that.hintValue = '';
@@ -176,7 +176,7 @@
             };
 
             // html() deals with many types: htmlString or Element or Array or jQuery
-            that.noSuggestionsContainer = $('<div class="autocomplete-no-suggestion"></div>')
+            that.noSuggestionsContainer = $('<div class="search__no-suggestion"></div>')
                 .html(this.options.noSuggestionNotice).get(0);
 
             that.suggestionsContainer = Autocomplete.utils.createNode(options.containerClass);
@@ -670,7 +670,7 @@
 
                     category = currentCategory;
 
-                    return '<div class="autocomplete-group"><strong>' + category + '</strong></div>';
+                    return '<div class="search__group"><strong>' + category + '</strong></div>';
                 };
 
             if (options.triggerSelectOnValidInput && that.isExactMatch(value)) {
